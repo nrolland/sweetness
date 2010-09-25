@@ -5,6 +5,7 @@ import logging
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseRedirect, HttpResponse
 from django.db import models
 from django.http import Http404
 
@@ -89,10 +90,17 @@ class Handler(BaseHandler):
         response = self.check_permission()
         if response:
             return response
-        response = self.update()
-        if response:
-            return response
-        return self.render()
+        
+        if self.request.method == 'POST' :
+            response = self.put()
+            if response:
+              return response
+            return HttpResponseRedirect(self.request.build_absolute_uri(self.request.path))
+        else:
+          response = self.update()
+          if response:
+              return response
+          return self.render()
 
 
 class UrlGroupProperty(object):

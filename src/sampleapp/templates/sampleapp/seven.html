@@ -1,0 +1,17 @@
+Here is some stuff I looked up from the database:
+
+<hr/>
+<h1>The main blog post:</h1>
+<div>author: {{view.blog_post.author}}</div>
+<h3>title: {{view.blog_post.title}}</h3>
+<div>body: {{view.blog_post.body}}</div>
+
+<hr/>
+<h1>The <em>other</em> blog post:</h1>
+<div>author: {{view.other_post.author}}</div>
+<h3>title: {{view.other_post.title}}</h3>
+<div>body: {{view.other_post.body}}</div>
+
+<hr/>
+<h3>A user</h3>
+{{view.user|default:"No user specified."}}
